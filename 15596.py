@@ -1,4 +1,5 @@
-import numpy as np
-
-def hap(a):
-    return np.sum(a)
+def solve(a):
+    temp = 0
+    for i in a:
+        temp += i
+    return temp
