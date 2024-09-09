@@ -1,50 +1,21 @@
-import copy
-
-class stack():
-    def __init__(self):
-        self.arr = []
-    def is_empty(self):
-        if len(self.arr) == 0:
-            return 1
-        else:
-            return 0
-    def push(self, num):
-        self.arr.append(num)
-    def pop(self):
-        if (len(self.arr) == 0):
-            return -1
-        else:
-            temp = self.arr[-1]
-            self.arr = self.arr[:-1]
-            return temp
-    def size(self):
-        return len(self.arr)
-    def top(self):
-        if (len(self.arr) == 0):
-            return -1
-        else:
-            return self.arr[-1]
+import sys
 
 n = int(input())
-st = stack()
+st = []
 result = []
-tops = input().split()
-tops = [int(x) for x in tops]
-for t in tops:
-    st.push(t)
+tops = sys.stdin.readline().split()
+tops = [0] + [int(x) for x in tops]
 
-while (not st.is_empty()):
-    target = st.pop()
-    temp = copy.deepcopy(st)
-    while (True):
-        if target < temp.top():
-            result.append(temp.size())
+for i in range(1, n + 1):
+    while (not len(st) == 0) :
+        if (tops[st[-1]] > tops[i]):
+            result.append(st[-1])
             break
         else:
-            temp.pop()
-            if (temp.is_empty()):
-                result.append(temp.size())
-                break
-
-for i in range(n-1, -1, -1):
-    print(result[i], end=" ")
+            st.pop()
+    if (len(st) == 0):
+        result.append(0)
+    st.append(i)
+        
+for x in result:
+    print(x, end=" ")
